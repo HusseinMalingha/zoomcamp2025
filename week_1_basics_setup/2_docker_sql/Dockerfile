@@ -1,6 +1,11 @@
 FROM python:3.12
 
-RUN apt-get install wget
+# Combine RUN commands and install correct packages
+RUN apt-get update && \
+    apt-get install -y wget gzip && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Python packages
 RUN pip install pandas sqlalchemy psycopg2  
 
 WORKDIR /app
